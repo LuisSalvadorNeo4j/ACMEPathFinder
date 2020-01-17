@@ -1,0 +1,39 @@
+= Neo4j Path Finder
+
+This project is an example you can use to build user defined procedures, functions and aggregation functions in Neo4j using Traversal API.
+
+To try this out, simply clone this repository and have a look at the source and test code.
+
+[Note]
+This project requires a Neo4j {branch}.x dependency.
+
+
+=== User Defined Procedure
+
+1. Relationships.java, Labels.java and Properties.java are self explanatory —> You can add all relationships, labels and properties you are going to need.
+2. PathFinder.java is where the main procedure is (the signature is annotated as well).
+
+      - getAssets is traversing the graph using all relationships you specify in the main procedure parameter when you call it. This can of course be change to your convenience.
+      - The evaluator will traverse the graph as deep as the limit parameter.
+
+3. PathFinderExpander.java and PathFinderEvaluator.java is only a template you can use to apply more rules to the traverse and make it more complex.
+
+
+So the following example will traverse the graph starting in the node 'London Bridge LU, Jubilee Eastbound platform’, using only 'SURFACE_LEVEL',’RAMP’ relationships to a depth of 3:
+
+MATCH (n:Point) WHERE n.name='London Bridge LU, Jubilee Eastbound platform'
+RETURN com.acme.pf.traverse(n,['SURFACE_LEVEL','RAMP'],3);
+
+== Building
+
+This project uses maven, to build a jar-file with the procedure in this
+project, simply package the project with maven:
+
+    mvn clean package
+
+This will produce a jar-file,`target/ACMEPathFinder-1.0.0-SNAPSHOT.jar`,
+that can be deployed in the `plugin` directory of your Neo4j instance.
+
+== License
+
+Apache License V2, see LICENSE
