@@ -12,7 +12,7 @@
   <description>PathFinder for ACME using Neo4j Traversal API</description>
 
   <properties>
-    <neo4j.version>3.5.11</neo4j.version>
+    <neo4j.version>5.26.21</neo4j.version>
   </properties>
 
   <dependencies>
